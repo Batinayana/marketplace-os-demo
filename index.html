@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Marketplace OS — демонстрация финансового кабинета для продавцов маркетплейсов. Все данные вымышлены.">
+<title>Marketplace OS — демонстрация</title>
+<style>
+:root{--ink:#42363e;--muted:#887a82;--rose:#966a81;--rose-dark:#6d465b;--line:#eae0e3;--surface:#fffefd;--bg:#faf7f6;--pale:#f6e9ee;--sage:#e9f3ed;--peach:#fcf1e6;font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-size:14px}button,select{font:inherit;cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid #b58b9b;outline-offset:3px}button{border:0}.app{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}
+aside{background:#f0e8eb;border-right:1px solid #e3d6dc;padding:30px 16px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+.logo{font-size:20px;letter-spacing:-.7px;font-weight:820;display:flex;align-items:center;gap:9px;margin:0 8px 35px}.logo b{background:#ac8396;color:#fff;border-radius:12px;display:grid;place-items:center;width:39px;height:39px}.logo small{display:block;font-size:10px;font-weight:550;letter-spacing:1px;text-transform:uppercase;color:#a18b98;margin-top:3px}
+.nav{color:#735d6b;background:transparent;text-align:left;border-radius:12px;padding:14px;display:flex;gap:10px;align-items:center;margin:2px 0;font-weight:650}.nav:hover,.nav.active{background:#fffafa}.nav.active{box-shadow:inset 3px 0 #b38198;color:#633e53}.asidefoot{margin-top:auto;font-size:12px;color:#927f89;border-top:1px solid #dfd1d8;padding:18px 7px;line-height:1.55}
+main{padding:28px clamp(20px,3vw,48px) 65px;min-width:0}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:22px;color:#93858c}.tag{background:#f8eadd;color:#8c6048;font-size:11px;border-radius:20px;padding:8px 12px;font-weight:750}
+header{padding:25px 27px;background:linear-gradient(120deg,#f2e1e9,#f9efea);border:1px solid #eadce1;border-radius:21px;margin-bottom:20px}.eyebrow{font-size:10px;letter-spacing:1.8px;color:#926f83;font-weight:800;text-transform:uppercase}h1{font-size:32px;margin:9px 0 8px;letter-spacing:-1.1px;color:#5d4250}header p{color:#887983;margin:0;line-height:1.55}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 3px}.filters label{display:grid;gap:5px;font-size:11px;color:#886f7b;font-weight:750}select{min-width:156px;border:1px solid #e6d7dd;background:#fffdfc;color:#503d48;padding:11px 33px 11px 13px;border-radius:11px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:19px}.card{background:var(--surface);border:1px solid var(--line);box-shadow:0 8px 24px #5d445008;border-radius:17px;padding:17px 18px}.card .label{font-size:11px;line-height:1.5;color:#837781;font-weight:750;min-height:33px}.metric{font-size:clamp(18px,1.7vw,28px);font-weight:820;letter-spacing:-1px;margin-top:11px;white-space:nowrap}.hint{font-size:11px;color:#a0929c;margin-top:10px}.section{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:21px;margin-top:17px;box-shadow:0 8px 24px #5d445005}.section h2{font-size:18px;margin:0 0 14px;letter-spacing:-.4px}.section p{color:var(--muted);line-height:1.6}
+table{width:100%;border-collapse:collapse;font-size:12.5px}th{text-align:left;background:#f7eff2;color:#715765;font-size:11px;padding:13px 12px;white-space:nowrap}td{padding:12px;border-bottom:1px solid #f0e8eb;white-space:nowrap}tr:last-child td{border-bottom:0}td.num{text-align:right;font-variant-numeric:tabular-nums}th.num{text-align:right}.tablewrap{overflow:auto;border:1px solid #f0e8eb;border-radius:12px}
+.small{font-size:11px;color:#91848b}.positive{color:#3e7354}.negative{color:#ac5261}.status{display:inline-block;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:800;background:var(--sage);color:#41674e}.links{display:flex;gap:8px;flex-wrap:wrap}.pill{background:#f6eaf0;color:#744b62;border:1px solid #e8d9df;padding:9px 13px;border-radius:10px;font-weight:700}.pill:hover{background:#eedde5}.notice{padding:13px 15px;border-radius:12px;background:#fff7ed;color:#865e3c;line-height:1.55;margin:15px 0}.hidden{display:none}.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}.footer{color:#9a8a92;font-size:11px;margin-top:22px}.tabbtn{background:none;color:#7f5870;text-decoration:underline;text-underline-offset:3px;padding:0}.mono{font-variant-numeric:tabular-nums}
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.app{grid-template-columns:200px minmax(0,1fr)}}@media(max-width:720px){.app{display:block}aside{position:relative;width:100%;height:auto;display:flex;flex-direction:row;flex-wrap:wrap;padding:12px}.logo{width:100%;margin:0 0 8px}.nav{font-size:12px;padding:10px}.asidefoot{display:none}main{padding:20px 14px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.metric{font-size:19px}.split{grid-template-columns:1fr}h1{font-size:26px}}
+</style></head>
+<body>
+<div class="app">
+<aside><div class="logo"><b>M</b><span>Marketplace OS<small>Финансовый кабинет</small></span></div>
+<button class="nav active" data-page="dashboard">▦ Финансовый пульт</button>
+<button class="nav" data-page="pnl">▤ ОПиУ</button>
+<button class="nav" data-page="dds">◫ ДДС</button>
+<button class="nav" data-page="sources">✓ Закрытие периодов</button>
+<div class="asidefoot">Демонстрационная версия<br>Без подключения к реальным кабинетам и без загрузки файлов.</div></aside>
+<main>
+<div class="top"><span id="breadcrumb">Финансы / Пульт</span><span class="tag">ДЕМО · ВЫМЫШЛЕННЫЕ ЦИФРЫ</span></div>
+<header><div class="eyebrow">Marketplace OS · финансовая аналитика</div><h1 id="pageTitle">Финансовый пульт</h1>
+<p>Выбирайте площадку и период, изучайте выручку, прибыль и денежные потоки. Все данные вымышлены и нужны только для знакомства с интерфейсом.</p>
+<div class="filters"><label>Год<select id="year"><option value="2026">2026</option></select></label>
+<label>Период<select id="period"><option value="all">Август — октябрь</option><option value="08">Август 2026</option><option value="09">Сентябрь 2026</option><option value="10">Октябрь 2026</option></select></label>
+<label>Площадка<select id="market"><option value="all">Весь бизнес</option><option value="Lamoda">Lamoda</option><option value="WB">Wildberries</option><option value="Ozon">Ozon</option></select></label></div></header>
+<section id="dashboard">
+<div id="kpis" class="kpis"></div>
+<div class="section"><h2>Ключевые решения · обзор</h2><div id="summary"></div></div>
+<div class="section"><h2>Показатели по месяцам</h2><div class="tablewrap"><table><thead><tr><th>Месяц</th><th class="num">Выручка</th><th class="num">Марж. результат</th><th class="num">Маржинальность</th><th class="num">Чистая прибыль</th><th>Период</th></tr></thead><tbody id="monthly"></tbody></table></div></div>
+<div class="section"><h2>Результаты по площадкам</h2><div class="tablewrap"><table><thead><tr><th>Канал</th><th class="num">Выручка</th><th class="num">Чистая прибыль</th><th></th></tr></thead><tbody id="markets"></tbody></table></div></div>
+</section>
+<section id="pnl" class="hidden"><div class="section"><h2>Отчёт о прибылях и убытках</h2><p>Управленческая модель по демонстрационным месяцам. Нажмите на показатель для пояснения его структуры.</p>
+<div class="tablewrap"><table><thead><tr><th>Показатель</th><th class="num">Сумма, ₽</th></tr></thead><tbody id="pnlRows"></tbody></table></div><div class="notice hidden" id="explain"></div></div></section>
+<section id="dds" class="hidden"><div class="section"><h2>Движение денежных средств</h2><p>Операции показаны по всему бизнесу, независимо от выбранной площадки. Переводы между своими счетами не становятся выручкой и расходами.</p>
+<div id="cashKpis" class="kpis"></div><div class="tablewrap" style="margin-top:20px"><table><thead><tr><th>Дата</th><th>Тип</th><th>Статья</th><th>Счёт</th><th class="num">Сумма, ₽</th></tr></thead><tbody id="cashRows"></tbody></table></div></div></section>
+<section id="sources" class="hidden"><div class="section"><h2>Как закрывается финансовый месяц</h2><p>В рабочем сервисе цифры подтверждаются оригинальными отчётами маркетплейсов. Эта демоверсия не содержит настоящих документов.</p><div id="sourceRows"></div></div></section>
+<div class="footer">Marketplace OS · демонстрация возможностей, не финансовая отчётность. Реальные документы, пароли и API-ключи сюда загружать нельзя.</div>
+</main></div>
+<script>
+'use strict';
+const data={
+ '08':{Lamoda:[100000,25000,42000,18000,2000],WB:[125000,47000,55000,26000,2500],Ozon:[90000,29000,48000,12000,1800]},
+ '09':{Lamoda:[900000,180000,370000,80000,18000],WB:[230000,89000,95000,35000,4600],Ozon:[155000,51000,84000,16000,3100]},
+ '10':{Lamoda:[820000,160000,348000,90000,16400],WB:[260000,101000,106000,30000,5200],Ozon:[190000,62000,103000,19000,3800]}
+};
+const cash=[
+ ['2026-08-07','Приход','Выплата маркетплейса','Расчётный счёт',180000],
+ ['2026-08-12','Расход','Фулфилмент','Расчётный счёт',18000],
+ ['2026-08-20','Расход','Образцы','Карта',15000],
+ ['2026-09-02','Приход','Выплата маркетплейса','Расчётный счёт',390000],
+ ['2026-09-12','Расход','Реклама','Расчётный счёт',85000],
+ ['2026-09-17','Перевод','Между своими счетами','Расчётный счёт',50000],
+ ['2026-09-23','Приход','Выплата маркетплейса','Расчётный счёт',470000],
+ ['2026-10-05','Расход','Закупка товара','Расчётный счёт',210000],
+ ['2026-10-14','Приход','Выплата маркетплейса','Расчётный счёт',640000],
+ ['2026-10-20','Расход','Логистика','Расчётный счёт',65000],
+ ['2026-10-26','Приход','Выплата маркетплейса','Расчётный счёт',375000]
+];
+const names={all:'Весь бизнес',Lamoda:'Lamoda',WB:'Wildberries',Ozon:'Ozon'};
+const months={'08':'Август','09':'Сентябрь','10':'Октябрь'};
+const fmt=n=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2,minimumFractionDigits:2}).format(n)+' ₽';
+const el=id=>document.getElementById(id);const money=n=>fmt(n||0);
+const sum=(arr)=>arr.reduce((a,b)=>a+b,0);
+function records(period,market){let rows=[];for(const m of ['08','09','10'])if(period==='all'||period===m)for(const s of ['Lamoda','WB','Ozon'])if(market==='all'||market===s)rows.push(data[m][s]);return rows;}
+function totals(period,market){let r=records(period,market),n=[0,0,0,0,0];r.forEach(a=>a.forEach((v,i)=>n[i]+=v));return n;}
+function getProfit(n){return n[0]-n[1]-n[2]-n[3]-n[4]}function margin(n){return n[0]?((n[0]-n[1]-n[2])/n[0]*100):0}
+function showPage(page){for(const id of ['dashboard','pnl','dds','sources'])el(id).classList.toggle('hidden',page!==id);document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.page===page));el('pageTitle').textContent=({dashboard:'Финансовый пульт',pnl:'ОПиУ',dds:'Движение денежных средств',sources:'Закрытие периодов'})[page];el('breadcrumb').textContent='Финансы / '+el('pageTitle').textContent;}
+function render(){
+const period=el('period').value,market=el('market').value,n=totals(period,market),s=[n[0],n[0]-n[1]-n[2],margin(n),n[0]-n[1]-n[2]-n[3]-n[4],n[2],n[1],n[3],n[4]];
+const k=[['Выручка после возвратов',money(s[0])],['Маржинальный результат',money(s[1])],['Маржинальность',s[2].toFixed(1).replace('.',',')+'%'],['Чистая прибыль',money(s[3])],['Комиссии и услуги',money(s[4])],['Себестоимость',money(s[5])],['Общие расходы',money(s[6])],['Налоговый резерв',money(s[7])]];
+el('kpis').innerHTML=k.map(x=>'<div class="card"><div class="label">'+x[0]+'</div><div class="metric mono">'+x[1]+'</div><div class="hint">Демонстрационные данные</div></div>').join('');
+el('summary').innerHTML='<p><b>'+names[market]+'</b> · '+(period==='all'?'август—октябрь 2026':months[period]+' 2026')+'. Выручка '+fmt(n[0])+', маржинальный результат '+fmt(s[1])+', чистая прибыль '+fmt(s[3])+'. Суммы рассчитаны по одной модели. В реальной версии каждый показатель должен ссылаться на оригинальный документ или учётную операцию.</p><div class="notice">Это демонстрация возможностей — не подтверждённый финансовый результат реального бизнеса.</div>';
+let monthly='';for(const m of ['08','09','10'])if(period==='all'||period===m){let a=totals(m,market);monthly+='<tr><td><button class="tabbtn monthjump" data-month="'+m+'">'+months[m]+' 2026</button></td><td class="num">'+money(a[0])+'</td><td class="num">'+money(a[0]-a[1]-a[2])+'</td><td class="num">'+margin(a).toFixed(1).replace('.',',')+'%</td><td class="num">'+money(getProfit(a))+'</td><td><span class="status">Демо · закрыт</span></td></tr>'}
+el('monthly').innerHTML=monthly;
+el('markets').innerHTML=['Lamoda','WB','Ozon'].map(m=>{let a=totals(period,m);return '<tr><td>'+names[m]+'</td><td class="num">'+money(a[0])+'</td><td class="num">'+money(getProfit(a))+'</td><td><button class="tabbtn marketjump" data-market="'+m+'">Открыть</button></td></tr>'}).join('');
+const lines=[['Выручка после возвратов',n[0]],['Себестоимость реализованных товаров',-n[1]],['Валовая прибыль',n[0]-n[1]],['Комиссии и услуги площадок',-n[2]],['Маржинальный результат',s[1]],['Общие операционные расходы',-n[3]],['Прибыль до налогового резерва',s[1]-n[3]],['Налоговый резерв',-n[4]],['Чистая прибыль',s[3]]];
+el('pnlRows').innerHTML=lines.map((x,i)=>'<tr><td><button class="tabbtn explain" data-line="'+i+'">'+x[0]+'</button></td><td class="num '+(x[1]<0?'negative':'')+'">'+money(x[1])+'</td></tr>').join('');
+let c=cash.filter(a=>period==='all'||a[0].slice(5,7)===period),income=sum(c.filter(a=>a[1]==='Приход').map(a=>a[4])),outcome=sum(c.filter(a=>a[1]==='Расход').map(a=>a[4])),transfer=sum(c.filter(a=>a[1]==='Перевод').map(a=>a[4]));
+el('cashKpis').innerHTML=[['Поступления',income],['Расходы',outcome],['Чистый денежный поток',income-outcome],['Переводы отдельно',transfer]].map(x=>'<div class="card"><div class="label">'+x[0]+'</div><div class="metric">'+money(x[1])+'</div></div>').join('');
+el('cashRows').innerHTML=c.map(a=>'<tr><td>'+a[0]+'</td><td>'+a[1]+'</td><td>'+a[2]+'</td><td>'+a[3]+'</td><td class="num">'+money(a[4])+'</td></tr>').join('')||'<tr><td colspan="5">Операций за этот период нет</td></tr>';
+el('sourceRows').innerHTML=['Lamoda','Wildberries','Ozon'].map(x=>'<div class="section" style="margin:10px 0"><b>'+x+'</b><p>Продажи и возвраты, комиссии и услуги, сверка первичных документов и себестоимость. В демоверсии используются вымышленные суммы.</p><span class="status">Синтетический период</span></div>').join('');
+el('explain').classList.add('hidden');
+}
+document.querySelectorAll('.nav').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+el('period').addEventListener('change',render);el('market').addEventListener('change',render);
+el('monthly').addEventListener('click',e=>{let b=e.target.closest('.monthjump');if(!b)return;el('period').value=b.dataset.month;render();showPage('pnl')});
+el('markets').addEventListener('click',e=>{let b=e.target.closest('.marketjump');if(!b)return;el('market').value=b.dataset.market;render();showPage('dashboard')});
+el('pnlRows').addEventListener('click',e=>{let b=e.target.closest('.explain');if(!b)return;el('explain').textContent='Демо-расшифровка: в коммерческой версии здесь будут ссылки на документ, дату, строку источника и формулу расчёта. Настоящие документы в демонстрации не используются.';el('explain').classList.remove('hidden')});
+render();
+</script>
+</body></html>
